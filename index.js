@@ -30,7 +30,8 @@ const connectDB = async () => {
 
 //middleware
 
-app.use(express.json());  //middleware for parsing incoming request data in json format. This middleware allows your app to accept JSON data from POST, PUT, and PATCH requests.
+//middleware for parsing incoming HTTP requests and responses data in json format. This middleware allows your app to accept JSON data from POST, PUT, and PATCH requests.
+app.use(express.json());  
 
 app.use(cookieParser());  //cookie parser middleware for handling cookies and session management(Used in authentication to track logged-in users.)
 
