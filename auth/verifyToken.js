@@ -52,14 +52,16 @@ export const restrict = (role) => async(req, res, next) => {
         const admin = await Admin.findById(adminId);
 
         if(!admin){
-            return res.status(404).send({success:false, message:"Admin not found!"});
+            return res.status(404).send({success:false, message:"Admin not found !!!"});
         }
 
         const adminRole = admin.role;
 
         if(adminRole === 'admin' && role.includes('admin')) {   //role in role.includes('admin') is coming from the restrict middleware. This middleware(export const restrict = (role) => async(req, res, next) => {) checks if the role is admin or not.
             next();
-        } else {
+        } 
+        
+        else {
             return res.status(401).send({success: false, message: 'You are not authorized!'});
         }
 

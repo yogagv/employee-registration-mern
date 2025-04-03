@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoute from './routes/auth.js';
 import adminRoute from './routes/admin.js';
+import empAuthRoute from './routes/empAuth.js';
+import employeeRoute from './routes/employee.js';
 
 //configure dotenv
 dotenv.config();
@@ -35,10 +37,28 @@ app.use(express.json());
 
 app.use(cookieParser());  //cookie parser middleware for handling cookies and session management(Used in authentication to track logged-in users.)
 
+//cors takes three paraments : origin, success status,  credentials.
+app.use(cors({
+
+  // instead of using this,
+  // origin: 'http://localhost:5174/'  
+  // methods: 'GET, POST, PUT, DELETE, HEAD'
+  // credentials: true
+  // we can use this
+  origin: function(origin, callback){
+      return callback(null, true)
+  },
+  optionsSuccessStatus: 200,
+  credentials: true         //for login and logout option we've given credentials true.
+}));     
+
+
+
 //routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/admin", adminRoute);
-
+app.use("/api/v1/empAuth", empAuthRoute);
+app.use("/api/v1/employee", employeeRoute);
 
 //server configuration
 connectDB()

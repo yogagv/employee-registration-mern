@@ -11,20 +11,25 @@ const EmployeeSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    password: {
+        type:String,
+        required:true
+    },
     mobno: {
         type: Number,
         required: true
     },
     designation: {
         type: String,
+        enum: ['HR', 'Manager', 'Team Lead', 'Sr. Developer', 'Developer', 'SDE l', 'SDE ll', 'Accountant'],
         required: true
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Thirdgender'],
+        enum: ['Male', 'Female', 'Thirdgender', 'Prefer not to say'],
         required: true
     },
-    imageUrl: {
+    empImage: {
         type: String,
         required:true
     },
@@ -37,7 +42,16 @@ const EmployeeSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    admin: {
+
+    isActive: { 
+        type: Boolean, 
+        default: true 
+    },
+
+    createdBy: {
+
+        type: new mongoose.Schema({
+
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Admin',
@@ -46,8 +60,33 @@ const EmployeeSchema = new mongoose.Schema({
         name: {
             type: String,
             required: true
+        },
+        role: {
+
+            type: String,
+            required: true
         }
-    }
+    },
+
+    { _id: false }
+), 
+        
+        required: true
+    },
+
+    updatedBy: {
+        type: new mongoose.Schema({
+        id: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
+        name: {type: String},
+        role: {type: String}
+    }, {_id: false})},
+
+    deletedBy: {
+        type: new mongoose.Schema({
+        id: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
+        name: {type: String},
+        role: {type: String}
+    }, {_id: false})}
 })
 
 export default mongoose.model('Employee', EmployeeSchema)
