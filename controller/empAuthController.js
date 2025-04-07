@@ -27,10 +27,10 @@ export const employeeRegister = async (req, res, next) => {
     const emailRegex = /^[a-zA-Z][a-zA-Z0-9]{3,}[@]{1}[a-zA-Z]{3,}\.[a-zA-Z]{2,}$/;
     const passwordRegex =  /^(?=.*[A-Za-z0-9])(?=.*[@#$%^&*!])[A-Za-z0-9@#$%^&*!]{8,}$/;
     const mobnoRegex = /^[8,9,6][0-9]{9}$/;
-    const empImageRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|))$/i;
+    const empImageRegex = /\.(png|jpg|jpeg)$/i;
 
-    const allowedDesignations = ['HR', 'Manager', 'Team Lead', 'Sr. Developer', 'Developer', 'SDE l', 'SDE ll', 'Accountant'];
-    const allowedGenders = ['Male', 'Female', 'Thirdgender', 'Prefer not to say'];
+    const allowedDesignations = ['HR', 'Manager', 'Team Lead', 'Sr. Developer', 'Developer', 'SDE I', 'SDE II', 'Accountant'];
+    const allowedGenders = ['Male', 'Female', 'Thirdgender'];
 
     if(!empname || !nameRegex.test(empname)) {
 
@@ -104,6 +104,16 @@ export const employeeRegister = async (req, res, next) => {
                 id: id,
                 name: admin.adminname,
                 role: admin.role
+            },
+            updatedBy: {
+                id: null,
+                name: null,
+                role: null
+            },
+            deletedBy: {
+                id: null,
+                name: null,
+                role: null
             }
         })  
 

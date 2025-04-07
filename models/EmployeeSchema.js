@@ -21,12 +21,12 @@ const EmployeeSchema = new mongoose.Schema({
     },
     designation: {
         type: String,
-        enum: ['HR', 'Manager', 'Team Lead', 'Sr. Developer', 'Developer', 'SDE l', 'SDE ll', 'Accountant'],
+        enum: ['HR', 'Manager', 'Team Lead', 'Sr. Developer', 'Developer', 'SDE I', 'SDE II', 'Accountant'],
         required: true
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Thirdgender', 'Prefer not to say'],
+        enum: ['Male', 'Female', 'Thirdgender'],
         required: true
     },
     empImage: {
@@ -80,6 +80,11 @@ const EmployeeSchema = new mongoose.Schema({
         name: {type: String},
         role: {type: String}
     }, {_id: false})},
+
+    updatedFields: {
+        type: [String],
+        default: []
+      },
 
     deletedBy: {
         type: new mongoose.Schema({
